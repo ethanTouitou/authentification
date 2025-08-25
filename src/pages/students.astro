@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <h1>Étudiants</h1>
+    <ul id="list"></ul>
+    <button id="logout">Déconnexion</button>
+
+    <script type="module">
+      import { pb } from "/src/lib/pb.js";
+
+      if (!pb.authStore.isValid) {
+        location.href = "/login";
+      } else {
+        const ul = document.getElementById("list");
+        const students = await pb.collection("students").getFullList();
+        ul.innerHTML = students
+          .map(s => `<li>${s.firstname} ${s.lastname} (${s.email})</li>`)
+          .join("");
+
+        document.getElementById("logout").onclick = () => {
+          pb.authStore.clear();
+          location.href = "/";
+        };
+      }
+    </script>
+  </body>
+</html>

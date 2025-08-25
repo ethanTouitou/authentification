@@ -1,11 +1,28 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { pb } from "../lib/pb.js";
 ---
+<html>
+  <body>
+    <h1>Accueil</h1>
+    <script type="module">
+      import { pb } from "/src/lib/pb.js";
 
-<Layout>
-	<Welcome />
-</Layout>
+      if (pb.authStore.isValid) {
+        document.body.innerHTML += `
+          <p>Connecté : ${pb.authStore.model.email}</p>
+          <a href="/students">Voir les étudiants</a><br>
+          <button id="logout">Déconnexion</button>
+        `;
+        document.getElementById("logout").onclick = () => {
+          pb.authStore.clear();
+          location.reload();
+        };
+      } else {
+        document.body.innerHTML += `
+          <a href="/login">Connexion</a> |
+          <a href="/register">Inscription</a>
+        `;
+      }
+    </script>
+  </body>
+</html>

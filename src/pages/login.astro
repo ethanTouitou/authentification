@@ -1,0 +1,31 @@
+<html>
+  <body>
+    <h1>Connexion</h1>
+    <form id="loginForm">
+      <input name="email" type="email" placeholder="Email" required /><br>
+      <input name="password" type="password" placeholder="Mot de passe" required /><br>
+      <button>Se connecter</button>
+    </form>
+    <p id="msg"></p>
+    <p>Pas encore de compte ? <a href="/register">S'inscrire</a></p>
+
+    <script type="module">
+      import { pb } from "/src/lib/pb.js";
+
+      const form = document.getElementById("loginForm");
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        try {
+          await pb.collection("users").authWithPassword(
+            form.email.value,
+            form.password.value
+          );
+          location.href = "/students";
+        } catch (err) {
+          document.getElementById("msg").textContent = "Échec de connexion";
+          console.error(err);
+        }
+      };
+    </script>
+  </body>
+</html>
