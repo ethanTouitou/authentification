@@ -1,11 +1,8 @@
----
-import { pb } from "../lib/pb.js";
----
 <html>
   <body>
     <h1>Accueil</h1>
     <script type="module">
-      import { pb } from "/src/lib/pb.js";
+      const { pb } = await import('/lib/pb.js');
 
       if (pb.authStore.isValid) {
         document.body.innerHTML += `

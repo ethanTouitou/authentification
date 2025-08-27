@@ -1,3 +1,4 @@
+
 <html>
   <body>
     <h1>Étudiants</h1>
@@ -5,7 +6,7 @@
     <button id="logout">Déconnexion</button>
 
     <script type="module">
-      import { pb } from "/src/lib/pb.js";
+      const { pb } = await import('/lib/pb.js');
 
       if (!pb.authStore.isValid) {
         location.href = "/login";

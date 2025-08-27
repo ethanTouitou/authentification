@@ -1,3 +1,4 @@
+
 <html>
   <body>
     <h1>Inscription</h1>
@@ -11,7 +12,7 @@
     <p>Déjà un compte ? <a href="/login">Se connecter</a></p>
 
     <script type="module">
-      import { pb } from "/src/lib/pb.js";
+      const { pb } = await import('/lib/pb.js');
 
       const form = document.getElementById("registerForm");
       form.onsubmit = async (e) => {

@@ -1,9 +1,18 @@
+// astro.config.mjs
 import { defineConfig } from "astro/config";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
   vite: {
-    define: {
-      "process.env.PUBLIC_PB_URL": JSON.stringify(process.env.PUBLIC_PB_URL)
-    }
+    plugins: [
+      viteStaticCopy({
+        targets: [
+          {
+            src: "lib",   // dossier source
+            dest: ""      // copie dans dist/lib
+          }
+        ]
+      })
+    ]
   }
 });
