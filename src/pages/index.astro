@@ -1,8 +1,13 @@
+---
+import "../style/global.css";
+---
+
 <html>
   <body>
     <h1>Accueil</h1>
+    <button class="btn"> daisyUI Button </button>
     <script type="module">
-      const { pb } = await import('/lib/pb.js');
+      const { pb } = await import("/lib/pb.js");
 
       if (pb.authStore.isValid) {
         document.body.innerHTML += `
