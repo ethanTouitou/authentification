@@ -11,6 +11,9 @@
       /><br />
       <button>Se connecter</button>
     </form>
+    <button id="googlelogin" type="button">Se connecter avec Google</button>
+    <p id="msg" role="status"></p>
+
     <p id="msg"></p>
     <p>Pas encore de compte ? <a href="/register">S'inscrire</a></p>
 
@@ -36,6 +39,19 @@
           console.error(err);
         }
       };
+
+      const googleBtn = document.getElementById("googlelogin");
+      googleBtn?.addEventListener("click", async () => {
+        try {
+          await pb.collection("users").authWithOAuth2({ provider: "google" });
+          // À ce stade, pb.authStore.model est rempli, l'utilisateur est connecté
+          window.location.href = "/students"; // adapte la route
+        } catch (err) {
+          console.error(err);
+          document.getElementById("msg").textContent =
+            "Échec de la connexion Google";
+        }
+      });
     </script>
   </body>
 </html>
