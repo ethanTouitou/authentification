@@ -2,6 +2,8 @@
 import { defineConfig } from "astro/config";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
+import tailwind from "@astrojs/tailwind";
+
 export default defineConfig({
   vite: {
     plugins: [
@@ -14,5 +16,7 @@ export default defineConfig({
         ]
       })
     ]
-  }
+  },
+
+  integrations: [tailwind()]
 });
