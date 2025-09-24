@@ -12,6 +12,8 @@
       <button>Se connecter</button>
     </form>
     <button id="googlelogin" type="button">Se connecter avec Google</button>
+    <button id="githublogin">Se connecter avec GitHub</button>
+
     <p id="msg" role="status"></p>
 
     <p id="msg"></p>
@@ -52,6 +54,17 @@
             "Échec de la connexion Google";
         }
       });
+      const githublogin = document.getElementById("githublogin");
+      githublogin.onclick = async () => {
+        try {
+          await pb.collection("users").authWithOAuth2({ provider: "github" });
+          location.href = "/students";
+        } catch (err) {
+          document.getElementById("msg").textContent =
+            "?%chec de connexion GitHub";
+          console.error(err);
+        }
+      };
     </script>
   </body>
 </html>
